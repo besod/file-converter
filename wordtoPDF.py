@@ -2,7 +2,7 @@ import os
 import comtypes.client
 
 # Define the folder containing the Word files
-WORD_FOLDER = r"D:\Cv\JobbSökning\Transdev\lokförare 25"
+WORD_FOLDER = r"D:\example folder\word_files"
 
 def convert_docx_to_pdf(filename):
     """
