@@ -1,0 +1,8 @@
+wordtopdf/
+__pycache__/
+*.log
+*.pyc
+.DS_Store
+venv/
+.idea/
+*.sqlite3
