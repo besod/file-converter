@@ -1,7 +1,7 @@
 # 📄 File Converter
 
 ## 🚀 About
-**File Converter Repo** is a Python-based tool designed to convert various file formats. Currently, it supports **Word to PDF conversion**, with plans to expand support for other formats in the future.
+**File Converter Repo** is a Python-based tool designed to convert various file formats. Currently, it supports **Word to PDF conversion** .
 
 ## 🔥 Features
 - ✅ Convert **Word (.docx) to PDF**
