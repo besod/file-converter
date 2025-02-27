@@ -9,7 +9,7 @@
 - ✅ Batch processing support
 - ✅ Future expansion for other file types
 
-## 🛠️ Installation
+## Installation
 1. **Clone the repository**  
    ```bash
    git clone git@github.com:YOUR_GITHUB_USERNAME/file-converter.git
