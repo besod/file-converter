@@ -14,3 +14,6 @@
    ```bash
    git clone git@github.com:YOUR_GITHUB_USERNAME/file-converter.git
    cd file-converter
+   
+## Install dependencies
+pip install -r requirements.txt
