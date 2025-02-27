@@ -9,6 +9,6 @@
 - ✅ Batch processing support
 - ✅ Future expansion for other file types
 
-**Install dependencies**
-   ```
-    pip install -r requirements.txt
+   **Install dependencies**
+      ```
+       pip install -r requirements.txt
