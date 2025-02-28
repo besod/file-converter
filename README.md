@@ -13,11 +13,3 @@
 **Install dependencies**
 ```
 pip install -r requirements.txt
-
-**🔐 Setup Environment Variables**
-Before running the script, create a .env file in the project folder and specify the directory containing your Word files:
-
-ini
-Copy
-Edit
-WORD_FOLDER=D:\Cv\JobbSökning\Transdev
