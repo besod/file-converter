@@ -1,69 +1,95 @@
 import os
+import logging
 import comtypes.client
+from dotenv import load_dotenv
 
-# Define the folder containing the Word files
-WORD_FOLDER = r"D:\example folder\word_files"
+#  Load environment variables from .env file
+load_dotenv()
 
-def convert_docx_to_pdf(filename):
-    """
-    Converts a specific DOCX file to PDF.
+# Get the folder path from the environment variable
+WORD_FOLDER = os.getenv("WORD_FOLDER")
 
-    Parameters:
-        filename (str): The name of the DOCX file (without the full path).
-    
-    Returns:
-        str: The path of the generated PDF file if successful, otherwise None.
-    """
+if not WORD_FOLDER:
+    raise ValueError("❌ ERROR: WORD_FOLDER is not set in the .env file!")
+
+# Setup logging
+logging.basicConfig(
+    filename="wordtoPDF.log",
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+)
+
+
+def get_word_files():
+    """Returns a list of .docx and .doc files in the configured WORD_FOLDER."""
+    try:
+        return [f for f in os.listdir(WORD_FOLDER) if f.lower().endswith((".docx", ".doc"))]
+    except Exception as e:
+        logging.error(f"Error accessing directory: {e}")
+        return []
+
+
+def is_valid_filename(filename):
+    """Validates the filename to prevent path traversal attacks."""
+    return filename in get_word_files()
+
+
+def convert_word_to_pdf(filename):
+    """Converts a specific DOCX or DOC file to PDF."""
     input_path = os.path.join(WORD_FOLDER, filename)
-
-    if not os.path.exists(input_path):
-        print(f"Error: The file '{filename}' does not exist in '{WORD_FOLDER}'.")
-        return None
-
-    if not filename.lower().endswith(".docx"):
-        print("Error: The specified file is not a DOCX file.")
-        return None
-
-    # Define output PDF path (same folder, same name but with .pdf extension)
     output_path = os.path.splitext(input_path)[0] + ".pdf"
 
+    if not is_valid_filename(filename):
+        logging.warning(f"Security alert: Attempted invalid file access - {filename}")
+        print("❌ Invalid file selection.")
+        return None
+
     try:
-        # Open Word application
         word = comtypes.client.CreateObject("Word.Application")
         word.Visible = False  # Run in the background
 
-        # Open the document and save it as PDF
         doc = word.Documents.Open(input_path)
-        doc.SaveAs(output_path, FileFormat=17)  # 17 corresponds to PDF format
+        doc.SaveAs(output_path, FileFormat=17)  # 17 = PDF format
         doc.Close()
         word.Quit()
 
+        logging.info(f"✅ Successfully converted: {filename} -> {output_path}")
         print(f"✅ Conversion successful: {output_path}")
         return output_path
+
+    except comtypes.COMError as e:
+        logging.error(f"Word COM error: {e}")
     except Exception as e:
-        print(f"❌ Error during conversion: {e}")
-        return None
+        logging.error(f"❌ Unexpected error: {e}")
+    finally:
+        try:
+            word.Quit()
+        except:
+            pass
+
+
+def main():
+    """Main function to list files and allow user selection."""
+    word_files = get_word_files()
+
+    if not word_files:
+        print("⚠️ No Word files (.docx/.doc) found in the folder.")
+        return
+
+    print("\n📄 Available Word files:")
+    for i, file in enumerate(word_files, 1):
+        print(f"{i}. {file}")
+
+    try:
+        choice = int(input("\nEnter the number of the file to convert: ").strip())
+        if 1 <= choice <= len(word_files):
+            selected_file = word_files[choice - 1]
+            convert_word_to_pdf(selected_file)
+        else:
+            print("❌ Invalid selection. Please enter a valid number.")
+    except ValueError:
+        print("❌ Invalid input. Please enter a number.")
+
 
 if __name__ == "__main__":
-    # List all DOCX files in the folder
-    docx_files = [f for f in os.listdir(WORD_FOLDER) if f.lower().endswith(".docx")]
-
-    if not docx_files:
-        print("No DOCX files found in the folder.")
-    else:
-        print("\nAvailable DOCX files:")
-        for i, file in enumerate(docx_files, 1):
-            print(f"{i}. {file}")
-
-        # Ask user to select a file
-        choice = input("\nEnter the number of the file you want to convert: ").strip()
-        
-        if choice.isdigit():
-            choice = int(choice)
-            if 1 <= choice <= len(docx_files):
-                selected_file = docx_files[choice - 1]
-                convert_docx_to_pdf(selected_file)
-            else:
-                print("Invalid selection. Please enter a valid number.")
-        else:
-            print("Invalid input. Please enter a number.")
+    main()
