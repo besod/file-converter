@@ -21,9 +21,11 @@ cd file-converter
 ```pip install -r requirements.txt```
 
 #### 🔐 Setup Environment Variables
-Before running the script, create a .env file in the project folder and specify the directory containing your Word files:
+- Before running the script, create a .env file in the project folder and specify the directory containing your Word files:
 
 ```WORD_FOLDER = D:\folder\myfolder```
+
+- Place .docx and .doc files inside the configured WORD_FOLDER.
 
 #### Run the script:
 ```python wordtoPDF.py```
