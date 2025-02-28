@@ -21,7 +21,7 @@ cd file-converter
 ```pip install -r requirements.txt```
 
 #### 3️⃣ 🔐 Setup Environment Variables
-```WORD_FOLDER=D:\myfolder\folder```
+```WORD_FOLDER = D:\folder\myfolder```
 
 
 
