@@ -12,14 +12,15 @@
 
 ## 🛠️ Installation
 
-### 1️⃣ Clone the Repository
+#### 1️⃣ Clone the Repository
 ```git clone git@github.com:YOUR_GITHUB_USERNAME/file-converter.git```
 
 cd file-converter
 
-### 2️⃣ Install Dependencies
+#### 2️⃣ Install Dependencies
 ```pip install -r requirements.txt```
-### 3️⃣ 🔐 Setup Environment Variables
+
+#### 3️⃣ 🔐 Setup Environment Variables
 ```WORD_FOLDER=D:\myfolder\folder```
 
 
