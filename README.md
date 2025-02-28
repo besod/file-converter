@@ -23,6 +23,10 @@ cd file-converter
 #### 🔐 Setup Environment Variables
 ```WORD_FOLDER = D:\folder\myfolder```
 
+#### Run the script:
+```python wordtoPDF.py```
+
+
 
 
 
