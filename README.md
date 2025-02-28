@@ -10,6 +10,9 @@
 - ✅ Logging for better traceability
 - ✅ Uses environment variables to hide sensitive paths
 
+**🔐 Setup Environment Variables**
+WORD_FOLDER=D:\Cv\JobbSökning\Transdev
+
 **Install dependencies**
 ```
 pip install -r requirements.txt
