@@ -21,6 +21,7 @@ cd file-converter
 ```pip install -r requirements.txt```
 
 #### 🔐 Setup Environment Variables
+Before running the script, create a .env file in the project folder and specify the directory containing your Word files:
 ```WORD_FOLDER = D:\folder\myfolder```
 
 #### Run the script:
