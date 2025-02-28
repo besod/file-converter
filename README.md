@@ -10,9 +10,25 @@
 - ✅ Logging for better traceability
 - ✅ Uses environment variables to hide sensitive paths
 
-**🔐 Setup Environment Variables**
-WORD_FOLDER = D:\myfolder\folder
+## 🛠️ Installation
 
-**Install dependencies**
-```
-pip install -r requirements.txt
+### 1️⃣ Clone the Repository
+```git clone git@github.com:YOUR_GITHUB_USERNAME/file-converter.git```
+
+cd file-converter
+
+### 2️⃣ Install Dependencies
+```pip install -r requirements.txt```
+### 3️⃣ 🔐 Setup Environment Variables
+```WORD_FOLDER=D:\myfolder\folder```
+
+
+
+
+
+
+
+
+
+
+
