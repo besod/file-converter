@@ -11,7 +11,7 @@
 - ✅ Uses environment variables to hide sensitive paths
 
 **🔐 Setup Environment Variables**
-WORD_FOLDER=D:\Cv\JobbSökning\Transdev
+WORD_FOLDER = D:\myfolder\folder
 
 **Install dependencies**
 ```
