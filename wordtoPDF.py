@@ -12,7 +12,7 @@ WORD_FOLDER = os.getenv("WORD_FOLDER")
 if not WORD_FOLDER:
     raise ValueError("❌ ERROR: WORD_FOLDER is not set in the .env file!")
 
-# Setup logging
+# Setup logging 
 logging.basicConfig(
     filename="wordtoPDF.log",
     level=logging.INFO,
