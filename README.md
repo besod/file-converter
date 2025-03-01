@@ -1,7 +1,7 @@
 # 📄 File Converter
 
 ## 🚀 About
-**File Converter** is a Python-based tool designed to convert various file formats. Currently, it supports **Word to PDF conversion** .
+**File Converter** is a Python-based tool designed to convert various file formats. Currently, it supports **Word to PDF file conversion** .
 
 ## 🔥 Features
 - ✅ Convert **Word (`.docx`, `.doc`) to PDF**
