@@ -27,8 +27,8 @@ cd file-converter
 
 - Place .docx and .doc files inside the configured WORD_FOLDER.
 
-#### Run the script:
-```python wordtoPDF.py```
+- Run the script
+
 
 
 
