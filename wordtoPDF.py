@@ -40,7 +40,7 @@ def convert_word_to_pdf(filename):
     output_path = os.path.splitext(input_path)[0] + ".pdf"
 
     if not is_valid_filename(filename):
-        logging.warning(f"Security alert: Attempted invalid file access - {filename}")
+        logging.warning(f"❌ Invalid file selection. - {filename}")
         print("❌ Invalid file selection.")
         return None
 
