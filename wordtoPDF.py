@@ -1,50 +1,43 @@
 import os
-import logging
 import comtypes.client
 from dotenv import load_dotenv
+from logger import setup_logger  # Custom logger
 
-#  Load environment variables from .env file
+# Load environment variables
 load_dotenv()
+FILE_FOLDER = os.getenv("FILE_FOLDER")
 
-# Get the folder path from the environment variable
-WORD_FOLDER = os.getenv("WORD_FOLDER")
+if not FILE_FOLDER:
+    raise ValueError("❌ ERROR: FILE_FOLDER is not set in the .env file!")
 
-if not WORD_FOLDER:
-    raise ValueError("❌ ERROR: WORD_FOLDER is not set in the .env file!")
-
-# Setup logging 
-logging.basicConfig(
-    filename="wordtoPDF.log",
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s",
-)
-
+# Setup logger for this script
+word_logger = setup_logger("wordtoPDF")
 
 def get_word_files():
-    """Returns a list of .docx and .doc files in the configured WORD_FOLDER."""
+    """Returns a list of .docx and .doc files in the configured FILE_FOLDER."""
     try:
-        return [f for f in os.listdir(WORD_FOLDER) if f.lower().endswith((".docx", ".doc"))]
+        return [f for f in os.listdir(FILE_FOLDER) if f.lower().endswith((".docx", ".doc"))]
     except Exception as e:
-        logging.error(f"Error accessing directory: {e}")
+        word_logger.error(f"Error accessing directory: {e}")
         return []
-
 
 def is_valid_filename(filename):
     """Validates the filename to prevent path traversal attacks."""
     return filename in get_word_files()
 
-
 def convert_word_to_pdf(filename):
     """Converts a specific DOCX or DOC file to PDF."""
-    input_path = os.path.join(WORD_FOLDER, filename)
+    input_path = os.path.join(FILE_FOLDER, filename)
     output_path = os.path.splitext(input_path)[0] + ".pdf"
 
     if not is_valid_filename(filename):
-        logging.warning(f"❌ Invalid file selection. - {filename}")
-        print("❌ Invalid file selection.")
+        word_logger.warning(f"Invalid file selection - {filename}")
         return None
 
     try:
+        # Ensure Word is closed before opening it
+        os.system("taskkill /F /IM WINWORD.EXE >nul 2>&1")
+
         word = comtypes.client.CreateObject("Word.Application")
         word.Visible = False  # Run in the background
 
@@ -53,20 +46,21 @@ def convert_word_to_pdf(filename):
         doc.Close()
         word.Quit()
 
-        logging.info(f"✅ Successfully converted: {filename} -> {output_path}")
+        word_logger.info(f"Successfully converted: {filename} -> {output_path}")
         print(f"✅ Conversion successful: {output_path}")
         return output_path
 
     except comtypes.COMError as e:
-        logging.error(f"Word COM error: {e}")
+        word_logger.error(f"Word COM error: {e}")
+        print(f"❌ Word COM error: {e}")
     except Exception as e:
-        logging.error(f"❌ Unexpected error: {e}")
+        word_logger.error(f"Unexpected error: {e}")
+        print(f"❌ Unexpected error: {e}")
     finally:
         try:
             word.Quit()
         except:
             pass
-
 
 def main():
     """Main function to list files and allow user selection."""
@@ -89,7 +83,6 @@ def main():
             print("❌ Invalid selection. Please enter a valid number.")
     except ValueError:
         print("❌ Invalid input. Please enter a number.")
-
 
 if __name__ == "__main__":
     main()
