@@ -34,7 +34,16 @@
 
 
 
+##  📚 References
+**PDF to Word Conversion:**
+pdf2docx Documentation: https://pdf2docx.readthedocs.io/​
+Python-Docx Documentation: https://python-docx.readthedocs.io/​
 
+**Word to PDF Conversion:**
+comtypes Documentation: https://pythonhosted.org/comtypes/​
+
+**PDF Merging:**
+PyPDF2 Documentation: https://pypdf2.readthedocs.io/
 
 
 
