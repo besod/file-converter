@@ -1,6 +1,6 @@
 import os
 from pdf2docx import Converter
-from logger import setup_logger  # custom logger
+from logger import setup_logger  #  Custom logger
 from dotenv import load_dotenv
 
 # Setup logger for this script

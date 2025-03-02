@@ -47,7 +47,6 @@ def convert_word_to_pdf(filename):
         word.Quit()
 
         word_logger.info(f"Successfully converted: {filename} -> {output_path}")
-        print(f"✅ Conversion successful: {output_path}")
         return output_path
 
     except comtypes.COMError as e:
